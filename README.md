@@ -72,7 +72,7 @@ h = the estimated movement cost to move from that given square on the grid to th
 
 ## Heuristics:
 
-We can calculate g but how to calculate h ?
+We can calculate g but how to calculate h?
 We can do things. 
 
 A: Either calculate the exact value of h (which is certainly time consuming). 
@@ -80,20 +80,23 @@ A: Either calculate the exact value of h (which is certainly time consuming).
 B: Approximate the value of h using some heuristics (less time consuming).
 We will discuss both of the methods.
 
-A) Exact Heuristics –
+A) Exact Heuristics:
+
 We can find exact values of h, but that is generally very time consuming.
 Below are some of the methods to calculate the exact value of h.
 1) Pre-compute the distance between each pair of cells before running the A* Search Algorithm.
 2) If there are no blocked cells/obstacles then we can just find the exact value of h without any pre-computation using the distance formula/Euclidean Distance
 
-B) Approximation Heuristics – 
-There are generally three approximation heuristics to calculate h –
+B) Approximation Heuristics:
 
-1) Manhattan Distance –  
+There are generally three approximation heuristics to calculate h:
+
+1) Manhattan Distance: 
 
   a) It is nothing but the sum of absolute values of differences in the goal’s x and y coordinates and the current cell’s x and y coordinates respectively
   
-  b) When to use this heuristic? – When we are allowed to move only in four directions only (right, left, top, bottom)
+  b) When to use this heuristic? - When we are allowed to move only in four directions only (right, left, top, bottom)
+  
 
 Formula:
 
@@ -106,7 +109,7 @@ The Manhattan Distance Heuristics is shown by the below figure (assume red spot 
 ![image](https://user-images.githubusercontent.com/23033203/133956058-d7c1d2d7-e950-4c69-9066-40ee3b4f9390.png)
 
 
-2) Euclidean Distance - 
+2) Euclidean Distance: 
 
     a) As it is clear from its name, it is nothing but the distance between the current cell and the goal cell using the distance formula
     
