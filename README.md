@@ -18,7 +18,7 @@ Informally speaking, A* Search algorithms, unlike other traversal techniques, it
 And it is also worth mentioning that many games and web-based maps use this algorithm to find the shortest path very efficiently (approximation). 
 
 ## Algorithm:
-We create two lists – Open List and Closed List (just like Dijkstra Algorithm)
+We create two lists – Open List and Closed List (just like Dijkstra Algorithm).
 
 ```
 // A* Search Algorithm
@@ -95,6 +95,10 @@ There are generally three approximation heuristics to calculate h –
   
   b) When to use this heuristic? – When we are allowed to move only in four directions only (right, left, top, bottom)
 
+Formula for H:
+![image](https://user-images.githubusercontent.com/23033203/133957318-b6f5131e-39b5-4e33-b75f-8313f3d75eb6.png)
+
+
 The Manhattan Distance Heuristics is shown by the below figure (assume red spot as source cell and green spot as target cell). 
 
 ![image](https://user-images.githubusercontent.com/23033203/133956058-d7c1d2d7-e950-4c69-9066-40ee3b4f9390.png)
@@ -106,6 +110,10 @@ The Diagonal Distance Heuristics is shown by the below figure (assume red spot a
 
 
 3) Euclidean Distance - Refer to GeeksforGeeks as Manhattan distance is used for this project.
+
+Formula for H:
+![image](https://user-images.githubusercontent.com/23033203/133957409-ee1d3a01-d780-406e-8ed6-0934b143c6e9.png)
+
 
 The Euclidean Distance Heuristics is shown by the below figure (assume red spot as source cell and green spot as target cell).
 ![image](https://user-images.githubusercontent.com/23033203/133956128-e595caa3-cbd7-4e4e-b10c-bf9dfc518527.png)
