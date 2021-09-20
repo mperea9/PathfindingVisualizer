@@ -85,38 +85,45 @@ Tower defense is a type of strategy video game where the goal is to defend a pla
 A* Search Algorithm is often used to find the shortest path from one point to another point. You can use this for each enemy to find a path to the goal.
 One example of this is the very popular game- Warcraft III 
 
-What if the search space is not a grid and is a graph?
+## What if the search space is not a grid and is a graph?:
 
 The same rules applies there also. The example of grid is taken for the simplicity of understanding. So we can find the shortest path between the source node and the target node in a graph using this A* Search Algorithm, just like we did for a 2D Grid.
 
-Time Complexity
+## Time Complexity:
 
 Considering a graph, it may take us to travel all the edge to reach the destination cell from the source cell [For example, consider a graph where source and destination nodes are connected by a series of edges, like – 0(source) –>1 –> 2 –> 3 (target)
 So the worse case time complexity is O(E), where E is the number of edges in the graph
 
-Auxiliary Space In the worse case we can have all the edges inside the open list, so required auxiliary space in worst case is O(V), where V is the total number of vertices.
+## Auxiliary Space: 
 
-Exercise to the Readers-
+In the worse case we can have all the edges inside the open list, so required auxiliary space in worst case is O(V), where V is the total number of vertices.
 
-Ever wondered how to make a game like- Pacman where there are many such obstacles. Can we use A* Search Algorithm to find the correct way ?
+## Exercise to the Readers:
+
+Ever wondered how to make a game like Pacman where there are many such obstacles. Can we use A* Search Algorithm to find the correct way?
 Think about it as a fun exercise.
 
-Articles for interested readers 
-In our program, the obstacles are fixed. What if the obstacles are moving ? Interested readers may see here an excellent discussion on this topic.
 
-Summary 
+## Summary:
+
 So when to use DFS over A*, when to use Dijkstra over A* to find the shortest paths? 
 
-We can summarise this as below-
+We can summarise this as below:
 
 1) One source and One Destination- 
-  → Use A* Search Algorithm (For Unweighted as well as Weighted Graphs)
+ 
+ → Use A* Search Algorithm (For Unweighted as well as Weighted Graphs)
 
-2) One Source, All Destination – 
+2) One Source, All Destination –
+ 
   → Use BFS (For Unweighted Graphs) 
+  
   → Use Dijkstra (For Weighted Graphs without negative weights) 
+  
   → Use Bellman Ford (For Weighted Graphs with negative weights)
 
 3) Between every pair of nodes- 
+  
   → Floyd-Warshall 
+  
   → Johnson’s Algorithm
