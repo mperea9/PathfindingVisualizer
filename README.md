@@ -17,6 +17,54 @@ A* Search algorithm is one of the best and popular technique used in path-findin
 Informally speaking, A* Search algorithms, unlike other traversal techniques, it has “brains”. What it means is that it is really a smart algorithm which separates it from the other conventional algorithms. This fact is cleared in detail in below sections. 
 And it is also worth mentioning that many games and web-based maps use this algorithm to find the shortest path very efficiently (approximation). 
 
+## Algorithm:
+We create two lists – Open List and Closed List (just like Dijkstra Algorithm)
+
+// A* Search Algorithm
+1.  Initialize the open list
+2.  Initialize the closed list
+    put the starting node on the open 
+    list (you can leave its f at zero)
+
+3.  while the open list is not empty
+    a) find the node with the least f on 
+       the open list, call it "q"
+
+    b) pop q off the open list
+  
+    c) generate q's 8 successors and set their 
+       parents to q
+   
+    d) for each successor
+        i) if successor is the goal, stop search
+          successor.g = q.g + distance between 
+                              successor and q
+          successor.h = distance from goal to 
+          successor (This can be done using many 
+          ways, we will discuss three heuristics- 
+          Manhattan, Diagonal and Euclidean 
+          Heuristics)
+          
+          successor.f = successor.g + successor.h
+
+        ii) if a node with the same position as 
+            successor is in the OPEN list which has a 
+           lower f than successor, skip this successor
+
+        iii) if a node with the same position as 
+            successor  is in the CLOSED list which has
+            a lower f than successor, skip this successor
+            otherwise, add  the node to the open list
+     end (for loop)
+  
+    e) push q on the closed list
+    end (while loop)
+    
+So suppose as in the below figure if we want to reach the target cell from the source cell, then the A* Search algorithm would follow path as shown below. Note that the below figure is made by considering Euclidean Distance as a heuristics.
+
+![image](https://user-images.githubusercontent.com/23033203/133956858-44ca342e-4f38-40dc-bac8-18c8d955fd41.png)
+
+
 ## Explanation:
 
 Consider a square grid having many obstacles and we are given a starting cell and a target cell. We want to reach the target cell (if possible) from the starting cell as quickly as possible. Here A* Search Algorithm comes to the rescue.
@@ -47,6 +95,7 @@ There are generally three approximation heuristics to calculate h –
 1) Manhattan Distance –  
 
   a) It is nothing but the sum of absolute values of differences in the goal’s x and y coordinates and the current cell’s x and y coordinates respectively
+  
   b) When to use this heuristic? – When we are allowed to move only in four directions only (right, left, top, bottom)
 
 The Manhattan Distance Heuristics is shown by the below figure (assume red spot as source cell and green spot as target cell). 
@@ -64,7 +113,7 @@ The Diagonal Distance Heuristics is shown by the below figure (assume red spot a
 The Euclidean Distance Heuristics is shown by the below figure (assume red spot as source cell and green spot as target cell).
 ![image](https://user-images.githubusercontent.com/23033203/133956128-e595caa3-cbd7-4e4e-b10c-bf9dfc518527.png)
 
-Relation (Similarity and Differences) with other algorithms- 
+## Relation (Similarity and Differences) with other algorithms:
 Dijkstra is a special case of A* Search Algorithm, where h = 0 for all nodes.
 
 ## Implementation: 
