@@ -29,10 +29,11 @@ h = the estimated movement cost to move from that given square on the grid to th
 
 We can calculate g but how to calculate h ?
 We can do things. 
-A) Either calculate the exact value of h (which is certainly time consuming). 
-             OR 
-B ) Approximate the value of h using some heuristics (less time consuming).
+A: Either calculate the exact value of h (which is certainly time consuming). 
+             OR              
+B: Approximate the value of h using some heuristics (less time consuming).
 We will discuss both of the methods.
+
 A) Exact Heuristics –
 We can find exact values of h, but that is generally very time consuming.
 Below are some of the methods to calculate the exact value of h.
