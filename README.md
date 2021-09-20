@@ -106,7 +106,12 @@ The Manhattan Distance Heuristics is shown by the below figure (assume red spot 
 ![image](https://user-images.githubusercontent.com/23033203/133956058-d7c1d2d7-e950-4c69-9066-40ee3b4f9390.png)
 
 
-2) Euclidean Distance - Refer to GeeksforGeeks as Manhattan distance is used for this project.
+2) Euclidean Distance - 
+
+    a) As it is clear from its name, it is nothing but the distance between the current cell and the goal cell using the distance formula
+    
+    b) When to use this heuristic? – When we are allowed to move in any directions.
+
 
 Formula:
 
