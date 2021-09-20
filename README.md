@@ -1,7 +1,8 @@
 # Pathfinding Visualizer
 
-## Description
+## Description:
 
 Source: [GeekforGeeks](https://www.geeksforgeeks.org/a-search-algorithm/)
 
 
+## Applications
