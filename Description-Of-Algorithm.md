@@ -129,8 +129,7 @@ The Euclidean Distance Heuristics is shown by the below figure (assume red spot 
 
 3) Diagonal Distance:
 
-    a) It is nothing but the maximum of absolute values of differences in the goal’s x and y coordinates and the current 
-    cell’s x and y coordinates respectively
+    a) It is nothing but the maximum of absolute values of differences in the goal’s x and y coordinates and the current cell’s x and y coordinates respectively
     
     b) When to use this heuristic? – When we are allowed to move in eight directions only (similar to a move of a King in Chess)
 
