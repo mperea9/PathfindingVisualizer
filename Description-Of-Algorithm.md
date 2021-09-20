@@ -127,7 +127,7 @@ The Euclidean Distance Heuristics is shown by the below figure (assume red spot 
 ![image](https://user-images.githubusercontent.com/23033203/133956128-e595caa3-cbd7-4e4e-b10c-bf9dfc518527.png)
 
 
-3) Diagonal Distance - Refer to GeeksforGeeks as Manhattan distance is used for this project.
+3) Diagonal Distance - Refer to GeeksforGeeks.
 
 The Diagonal Distance Heuristics is shown by the below figure (assume red spot as source cell and green spot as target cell).
 
