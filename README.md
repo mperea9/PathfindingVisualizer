@@ -96,7 +96,8 @@ There are generally three approximation heuristics to calculate h –
   b) When to use this heuristic? – When we are allowed to move only in four directions only (right, left, top, bottom)
 
 Formula for H:
-![image](https://user-images.githubusercontent.com/23033203/133957318-b6f5131e-39b5-4e33-b75f-8313f3d75eb6.png)
+
+![image](https://user-images.githubusercontent.com/23033203/133957459-20410e31-8349-4254-94d6-2a4476c21796.png)
 
 
 The Manhattan Distance Heuristics is shown by the below figure (assume red spot as source cell and green spot as target cell). 
@@ -112,6 +113,7 @@ The Diagonal Distance Heuristics is shown by the below figure (assume red spot a
 3) Euclidean Distance - Refer to GeeksforGeeks as Manhattan distance is used for this project.
 
 Formula for H:
+
 ![image](https://user-images.githubusercontent.com/23033203/133957409-ee1d3a01-d780-406e-8ed6-0934b143c6e9.png)
 
 
