@@ -4,5 +4,7 @@
 
 ## Relevant video: https://www.youtube.com/watch?v=EBlNqnWcTHA&list=LL&index=15
 
+## Source Code: https://github.com/mperea9/PathfindingVisualizer/blob/main/PathVis.py
+
 # My Code Walk Through:
 
