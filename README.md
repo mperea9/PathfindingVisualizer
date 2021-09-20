@@ -102,11 +102,14 @@ Formula:
 
 The Manhattan Distance Heuristics is shown by the below figure (assume red spot as source cell and green spot as target cell). 
 
+
 ![image](https://user-images.githubusercontent.com/23033203/133956058-d7c1d2d7-e950-4c69-9066-40ee3b4f9390.png)
 
 2) Diagonal Distance - Refer to GeeksforGeeks as Manhattan distance is used for this project.
 
 The Diagonal Distance Heuristics is shown by the below figure (assume red spot as source cell and green spot as target cell).
+
+
 ![image](https://user-images.githubusercontent.com/23033203/133956160-f22b34ba-4bf8-48cd-9b1d-cace4a60da1a.png)
 
 
@@ -118,6 +121,8 @@ Formula:
 
 
 The Euclidean Distance Heuristics is shown by the below figure (assume red spot as source cell and green spot as target cell).
+
+
 ![image](https://user-images.githubusercontent.com/23033203/133956128-e595caa3-cbd7-4e4e-b10c-bf9dfc518527.png)
 
 ## Relation (Similarity and Differences) with other algorithms:
