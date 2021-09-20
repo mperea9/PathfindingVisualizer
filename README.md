@@ -1,4 +1,4 @@
 # Pathfinding Visualizer
 
-# My Code Walk Through
+# My Code Walk Through:
 
