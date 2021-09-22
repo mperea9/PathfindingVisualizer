@@ -6,7 +6,7 @@
 
 ## Source Code: https://github.com/mperea9/PathfindingVisualizer/blob/main/PathVis.py
 
-# My Code Walk Through:
+# My Code with Comments:
 
 ## To Start (Imports, Display size, Defining colors)
 
