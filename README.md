@@ -35,7 +35,7 @@ TURQUOISE = (64, 224, 208)
 
 ```
 class Node:                                             # define class as Node to create our main visualizer tool before our algorithm, tracks all our nodes
-    def __init__(self, row, col, width, total_rows):    # 
+    def __init__(self, row, col, width, total_rows):    
         self.row = row
         self.col = col
         self.x = row * width                            # keep track of x and y cooridinates on the screen
@@ -87,21 +87,21 @@ class Node:                                             # define class as Node t
     def draw(self, win):                                                                    # method we call when we want to draw the node on the screen
         pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.width))         # window, color, x, y, width, height
         
-    def update_neighbors(self, grid):
+    def update_neighbors(self, grid):                       # checks neighbors, if they aren't a barrier then the node is added into neighbors list
         self.neighbors = []
-        if self.row < self.total_rows - 1 and not grid[self.row + 1][self.col].is_barrier(): # down
-            self.neighbors.append(grid[self.row + 1][self.col])
+        if self.row < self.total_rows - 1 and not grid[self.row + 1][self.col].is_barrier(): # checks node that is directly down to see if it is a barrier
+            self.neighbors.append(grid[self.row + 1][self.col])     # appends node into neighbors list
 
-        if self.row > 0 and not grid[self.row - 1][self.col].is_barrier(): # up
-            self.neighbors.append(grid[self.row - 1][self.col])
+        if self.row > 0 and not grid[self.row - 1][self.col].is_barrier(): # checks node that is directly up to see if it is a barrier
+            self.neighbors.append(grid[self.row - 1][self.col])     # appends node into neighbors list
 
-        if self.col < self.total_rows - 1 and not grid[self.row][self.col + 1].is_barrier(): # right
-            self.neighbors.append(grid[self.row][self.col + 1])
+        if self.col < self.total_rows - 1 and not grid[self.row][self.col + 1].is_barrier(): # checks node that is to the right to see if it is a barrier
+            self.neighbors.append(grid[self.row][self.col + 1])     # appends node into neighbors list
 
-        if self.col > 0 and not grid[self.row][self.col - 1].is_barrier(): # left
-            self.neighbors.append(grid[self.row][self.col - 1])
+        if self.col > 0 and not grid[self.row][self.col - 1].is_barrier(): # checks node that is to the left to see if it is a barier
+            self.neighbors.append(grid[self.row][self.col - 1])     # appends node into neighbors list
     
-    def __lt__(self, other):                                # 
+    def __lt__(self, other): 
         return False
 ```
 
@@ -113,94 +113,94 @@ def h(p1, p2):                  # define heuristic function, which is the Manhat
     x2, y2 = p2
     return abs(x1 - x2) + abs(y1 - y2)
 
-def reconstruct_path(came_from, current, draw):    # need to continue walk through
-    while current in came_from:
-        current = came_from[current]
-        current.make_path()
-        draw()
+def reconstruct_path(came_from, current, draw):    # reconstructs the shortest path found
+    while current in came_from:                     # while current is in came from table
+        current = came_from[current]                
+        current.make_path()                         # creates the path through each node
+        draw()                                      # current node is end node and reconstructs to the start node from each came_from node
 
-def algorithm(draw, grid, start, end):
-    count = 0
-    open_set = PriorityQueue()
-    open_set .put((0, count, start))
-    came_from = {}
-    g_score = {node: float("inf") for row in grid for node in row}
+def algorithm(draw, grid, start, end):                 
+    count = 0                                   # count is set to 0
+    open_set = PriorityQueue()                  # create an open set
+    open_set .put((0, count, start))            # add start node to priority queue
+    came_from = {}                              # keeping track of where each node came from, keeps track of path
+    g_score = {node: float("inf") for row in grid for node in row}      # create table for each g score
     g_score[start] = 0
-    f_score = {node: float("inf") for row in grid for node in row}
-    f_score[start] = h(start.get_pos(), end.get_pos())
+    f_score = {node: float("inf") for row in grid for node in row}      # create table for each f score
+    f_score[start] = h(start.get_pos(), end.get_pos())                  # f score set to heuristic, f score is set to distance from start to end node
     
-    open_set_hash = {start}
+    open_set_hash = {start}             # checks items are in or out of priority queue
     
-    while not open_set.empty():
+    while not open_set.empty():             # algorithm runs until open set is empty
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+            if event.type == pygame.QUIT:       # allows us to exit while loop
                 pygame.quit()
                 
-        current = open_set.get()[2]
-        open_set_hash.remove(current)
+        current = open_set.get()[2]             # current node popped out of queue
+        open_set_hash.remove(current)           # take node we popped and sync it with open set hash to make sure we don't have duplicates
         
-        if current == end: #make path
-            reconstruct_path(came_from, end, draw)
+        if current == end: #make path                   # if node we popped is end node then we are finished and found a path
+            reconstruct_path(came_from, end, draw)      # reconstructs the shortest path found
             end.make_end()
             return True
         
-        for neighbor in current.neighbors:
-            temp_g_score = g_score[current] + 1
+        for neighbor in current.neighbors:              # consider all neighbors of current node
+            temp_g_score = g_score[current] + 1         # take distance from node and add 1 because it is neighbor
             
-            if temp_g_score < g_score[neighbor]:
-                 came_from[neighbor] = current
+            if temp_g_score < g_score[neighbor]:        # if we found better path then we update path and store it to determine best path to each node
+                 came_from[neighbor] = current          # updating the came from node to current
                  g_score[neighbor] = temp_g_score
-                 f_score[neighbor] = temp_g_score + h(neighbor.get_pos(), end.get_pos())
-                 if neighbor not in open_set_hash:
+                 f_score[neighbor] = temp_g_score + h(neighbor.get_pos(), end.get_pos())       
+                 if neighbor not in open_set_hash:              # check if neighbor is in open set we then increment it
                      count += 1
-                     open_set.put((f_score[neighbor], count, neighbor))
-                     open_set_hash.add(neighbor)
-                     neighbor.make_open()
+                     open_set.put((f_score[neighbor], count, neighbor))     # put in this new neighbor since it has better path
+                     open_set_hash.add(neighbor)                            # store the node in open set
+                     neighbor.make_open()                                   
                      
-        draw()
+        draw()  
         
-        if current != start:
+        if current != start:            # if current is not the start node then close it, we can make the node red since it won't be reconsidered
             current.make_closed()
             
     return False
                  
 
-def make_grid(rows, width):
-    grid = []
-    gap = width // rows
-    for i in range(rows):
+def make_grid(rows, width):             # data structure that can hold all nodes to manipulate grid, how many rows and what width you want
+    grid = []                           # grid is set to blank lise
+    gap = width // rows                 # using integer divison to get width of each node should be
+    for i in range(rows):               # in grid row i append node into it so we have lists inside lists that each store nodes
         grid.append([])
         for j in range(rows):
             node = Node(i, j, gap, rows)
             grid[i].append(node)
             
-    return grid
+    return grid                         # grid is created
 
 
-def draw_grid(win, rows, width):
+def draw_grid(win, rows, width):        # function to draw grid lines
     gap = width // rows
     for i in range(rows):
-        pygame.draw.line(win, GREY, (0, i * gap), (width, i * gap))
+        pygame.draw.line(win, GREY, (0, i * gap), (width, i * gap))         # for every row we draw a horizontal line
         for j in range(rows):
-            pygame.draw.line(win, GREY, (j * gap, 0), (j * gap, width))
+            pygame.draw.line(win, GREY, (j * gap, 0), (j * gap, width))     # flip coordinates, so for every column we draw a vertical line
             
 
-def draw(win, grid, rows, width):
-    win.fill(WHITE)
+def draw(win, grid, rows, width):           # make function that draws everything
+    win.fill(WHITE)                         # fills entire screen with white and redraw everything per frame
     
     for row in grid:
         for node in row:
             node.draw(win)
             
-    draw_grid(win, rows, width)
+    draw_grid(win, rows, width)            # draw grid lines on top
     pygame.display.update()
     
     
-def get_clicked_pos(pos, rows, width):
+def get_clicked_pos(pos, rows, width):      # takes mouse position and what node we actually clicked on
     gap = width // rows
     y, x = pos
     
-    row = y // gap
+    row = y // gap                          # we take position in x and y and dividing it by width of node to show where we clicked
     col = x // gap
     
     return row, col
@@ -210,56 +210,56 @@ def get_clicked_pos(pos, rows, width):
 
 ```
 def main(win, width):
-    ROWS = 50
-    grid = make_grid(ROWS, width)
+    ROWS = 50                               # define amount of rows
+    grid = make_grid(ROWS, width)           # generates the grid
     
-    start = None
+    start = None                            # define the start and end position as none because we decide where
     end = None
     
-    run = True
+    run = True                              # keep track of start and end position, if we started algorithm or not
     while run:
-        draw(win, grid, ROWS, width)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+        draw(win, grid, ROWS, width)            # draws grid every loop
+        for event in pygame.event.get():      # loops through all events to check them
+            if event.type == pygame.QUIT:       # if we press exit then pygame window quits
                 run = False
             
-            if pygame.mouse.get_pressed()[0]: #left
-                pos = pygame.mouse.get_pos()
-                row, col = get_clicked_pos(pos, ROWS, width)
-                node = grid[row][col]
-                if not start and node != end:
-                    start = node
+            if pygame.mouse.get_pressed()[0]:       # check mouse button pressed, left mouse button = 0
+                pos = pygame.mouse.get_pos()                        # gives us position of mouse on screen
+                row, col = get_clicked_pos(pos, ROWS, width)        # give us row and col we clicked on, specific node
+                node = grid[row][col]                               # index node in grid
+                if not start and node != end:                       
+                    start = node                                    # makes start node, first thing you should create
                     start.make_start()
                     
                 elif not end and node != start:
-                    end = node
+                    end = node                                      # makes end node, second thing you should create
                     end.make_end()
                     
-                elif node != end and node != start:
+                elif node != end and node != start:                 # if node is not end or start node, then it is a barrier
                     node.make_barrier()
             
-            elif pygame.mouse.get_pressed()[2]: #right
-                pos = pygame.mouse.get_pos()
-                row, col = get_clicked_pos(pos, ROWS, width)
-                node = grid[row][col]
-                node.reset()
-                if node == start:
+            elif pygame.mouse.get_pressed()[2]:           # check mouse button pressed, right mouse button = 2
+                pos = pygame.mouse.get_pos()                # gives us position of mouse on screen
+                row, col = get_clicked_pos(pos, ROWS, width)    # gives us row and col we pressed on, specific node
+                node = grid[row][col]                       # index node in grid
+                node.reset()                                # this resets node to white
+                if node == start:                           # if we click on start node, then reset start node and make it next to be made
                     start = None
-                elif node == end:
+                elif node == end:                           # if we click on end node, then reset end node and make it next to be made
                     end = None
                     
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE and start and end:
+            if event.type == pygame.KEYDOWN:                # if we pressed a key on our keyboard
+                if event.key == pygame.K_SPACE and start and end:       # if we pressed space then we run the algorithm as long as we have start and end node
                     for row in grid:
                         for node in row:
-                            node.update_neighbors(grid)
+                            node.update_neighbors(grid)         # call method to update neighbors and check
                     
-                    algorithm(lambda: draw(win, grid, ROWS, width), grid, start, end)
+                    algorithm(lambda: draw(win, grid, ROWS, width), grid, start, end)       # allows us to pass draw function when we run algorithm method
                     
-                if event.key == pygame.K_c:
-                    start = None
+                if event.key == pygame.K_c:             # if we press the C key on our keyboard then it clears the board
+                    start = None                        # sets start and end node to none as we need to reset them
                     end = None
-                    grid = make_grid(ROWS, width)
+                    grid = make_grid(ROWS, width)       # cleaes and redraws the grid
                                     
     pygame.quit()
     
