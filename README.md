@@ -31,42 +31,42 @@ GREY = (128, 128, 128)
 TURQUOISE = (64, 224, 208)
 ```
 
-## Setting our Node Class
+## Setting our Node Class with methods
 
 ```
-class Node:
-    def __init__(self, row, col, width, total_rows):
+class Node:                                             # define class as Node to create our main visualizer tool before our algorithm, tracks all our nodes
+    def __init__(self, row, col, width, total_rows):    # 
         self.row = row
         self.col = col
-        self.x = row * width
+        self.x = row * width                            # keep track of x and y cooridinates on the screen
         self.y = col * width
-        self.color = WHITE
-        self.neighbors = []
+        self.color = WHITE                              # start with all white cubes
+        self.neighbors = []                             
         self.width = width
         self.total_rows = total_rows
         
-    def get_pos(self):
+    def get_pos(self):                                  # indexing with row and columns
         return self.row, self.col
-    
-    def is_closed(self):
+                                                        # these methods just ask what node is, so if RED then it is closed, etc.
+    def is_closed(self):                                # have we already looked at the node (in closed set), which is defined by red color
         return self.color == RED
     
-    def is_open(self):
+    def is_open(self):                                  # are you in open set, set by color green
         return self.color == GREEN
     
-    def is_barrier(self):
+    def is_barrier(self):                               # if it is a barrier, set to black
         return self.color == BLACK
     
-    def is_start(self):
+    def is_start(self):                                 # if node is the start node, then set to orange
         return self.color == ORANGE
     
-    def is_end(self):
+    def is_end(self):                                   # if node is the end node, then set to turquoise
         return self.color == TURQUOISE
     
-    def reset(self):
+    def reset(self):                                    # reset the node, set to white
         self.color = WHITE
         
-    def make_closed(self):
+    def make_closed(self):                              # these methods make the node and change the color, closed set to RED and same idea with the methods
         self.color = RED
     
     def make_open(self):
@@ -81,11 +81,11 @@ class Node:
     def make_end(self):
         self.color = TURQUOISE
     
-    def make_path(self):
+    def make_path(self):                                            # allows us to make a path which is set to purple
         self.color = PURPLE
     
-    def draw(self, win):
-        pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.width))
+    def draw(self, win):                                                                    # method we call when we want to draw the node on the screen
+        pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.width))         # window, color, x, y, width, height
         
     def update_neighbors(self, grid):
         self.neighbors = []
@@ -101,19 +101,19 @@ class Node:
         if self.col > 0 and not grid[self.row][self.col - 1].is_barrier(): # left
             self.neighbors.append(grid[self.row][self.col - 1])
     
-    def __lt__(self, other):
+    def __lt__(self, other):                                # 
         return False
 ```
 
-## Seting up our modules with main as well
+## Seting up our functions
 
 ```
-def h(p1, p2):
+def h(p1, p2):                  # define heuristic function, which is the Manhattan distance (up, down, left, right)
     x1, y1 = p1
     x2, y2 = p2
     return abs(x1 - x2) + abs(y1 - y2)
 
-def reconstruct_path(came_from, current, draw):
+def reconstruct_path(came_from, current, draw):    # need to continue walk through
     while current in came_from:
         current = came_from[current]
         current.make_path()
@@ -206,7 +206,7 @@ def get_clicked_pos(pos, rows, width):
     return row, col
 ```
 
-## Setting up main module
+## Setting up main function
 
 ```
 def main(win, width):
